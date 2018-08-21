@@ -40,6 +40,7 @@ var isCollide;
 var restartDom;
 var highScoreDom;
 var highScore=0;
+var swiper;
 
 //게임 실행
 init();
@@ -74,8 +75,38 @@ function createScene(){
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize( sceneWidth, sceneHeight );
+    renderer.domElement.id = "myCanvas";
     dom = document.getElementById('container');
     dom.appendChild(renderer.domElement);
+
+    swiper = new Hammer(document.getElementById('myCanvas'));
+    swiper.get('swipe').set({ velocity: 0.3 })
+    swiper.on('tap', function (e) {//위쪽(점프)
+        if(!jumping) {
+            bounceValue=0.1;
+            jumping=true;
+            validMove=false;
+        }
+    })
+    swiper.on('swipeleft', function (e) {//왼쪽
+        if(currentLane==middleLane){
+            currentLane=leftLane;
+        }else if(currentLane==rightLane){
+            currentLane=middleLane;
+        }else{
+            validMove=false;	
+        }
+    })
+    swiper.on('swiperight', function (e) {//오른쪽
+        if(currentLane==middleLane){
+            currentLane=rightLane;
+        }else if(currentLane==leftLane){
+            currentLane=middleLane;
+        }else{
+            validMove=false;	
+        }
+    })
+
     if(restartDom !== undefined) restartDom.style.display = "none";
     //stats = new Stats();
     //dom.appendChild(stats.dom);
