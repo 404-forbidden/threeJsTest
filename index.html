@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'pixelFont';
+            src: url("asset/ARCADECLASSIC.TTF");
+        }
+        * {
+            font-family: 'pixelFont';
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 3;
+            text-align: center;
+        }
+        #score {
+            font-size: 200%;
+            position: absolute;
+	        top: 10px;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+            display: block;
+            z-index: 2;
+        }
+        #highScore {
+            font-size: 200%;
+            position: absolute;
+	        top: 10px;
+            width: 100%;
+            text-align: right;
+            z-index: 100;
+            display: block;
+            z-index: 2;
+        }
+        #gameover {
+            position: absolute;
+            border: solid 1px;
+            height: 100vh;
+            z-index: 1;
+        }
+        #restart {
+            position: absolute;
+            margin: 0 auto;
+            top: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            background-color: rgb(218, 218, 218);
+            border-radius: 10px;
+            display: none;
+        }
+    </style>
+    <script src="three.min.js"></script>
+    <title>dino3D</title>
+</head>
+<body>
+    <div id="score"></div>
+    <div id="highScore"></div>
+    <img id="restart" src="asset/restart.png" onclick="dom.removeChild(renderer.domElement);init();">
+    <div id="container"></div>
+    <script src="game.js"></script>
+</body>
+</html>
